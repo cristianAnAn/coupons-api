@@ -1,4 +1,3 @@
-// models/coupon.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -41,7 +40,7 @@ const Coupon = sequelize.define('Coupon', {
   timestamps: true,
   updatedAt: 'LastUpdate',
   createdAt: false,
-  tableName: 'Coupons' // Opcional si quieres un nombre fijo
+  tableName: 'Coupons'
 });
 
 module.exports = Coupon;
