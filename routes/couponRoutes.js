@@ -130,12 +130,19 @@ router.post('/', verifyToken, requireRole('ADMINISTRADOR'), couponController.cre
 
 /**
  * @swagger
- * /coupons:
+ * /coupons/{id}:
  *   put:
  *     summary: Actualizar un cupón existente
  *     tags: [Cupones]
  *     security:
  *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID del cupón a actualizar
  *     requestBody:
  *       required: true
  *       content:
@@ -143,9 +150,6 @@ router.post('/', verifyToken, requireRole('ADMINISTRADOR'), couponController.cre
  *           schema:
  *             type: object
  *             properties:
- *               CouponId:
- *                 type: integer
- *                 example: 1
  *               CouponCode:
  *                 type: string
  *                 example: "SAVE20"
@@ -176,12 +180,16 @@ router.post('/', verifyToken, requireRole('ADMINISTRADOR'), couponController.cre
  *     responses:
  *       200:
  *         description: Cupón actualizado correctamente
+ *       404:
+ *         description: Cupón no encontrado
  *       403:
  *         description: Rol no autorizado
  *       401:
  *         description: Token inválido
  */
-router.put('/', verifyToken, requireRole('ADMINISTRADOR'), couponController.update);
+
+router.put('/:id', verifyToken, requireRole('ADMINISTRADOR'), couponController.update);
+
 
 /**
  * @swagger

@@ -42,14 +42,18 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const coupon = await Coupon.findByPk(req.body.CouponId);
-    if (!coupon) return res.status(404).json(createResponse({ isSuccess: false, message: 'Cupón no encontrado' }));
+    const coupon = await Coupon.findByPk(req.params.id);
+    if (!coupon) {
+      return res.status(404).json(createResponse({ isSuccess: false, message: 'Cupón no encontrado' }));
+    }
+
     await coupon.update(req.body);
     res.json(createResponse({ result: coupon, message: 'Cupón actualizado' }));
   } catch (error) {
     res.status(500).json(createResponse({ isSuccess: false, message: error.message }));
   }
 };
+
 
 exports.remove = async (req, res) => {
   try {
